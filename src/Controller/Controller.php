@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace cophpee\components\controller;
+namespace Cophpee\Components\Controller;
 
 class Controller
 {

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace cophpee\components\router;
+namespace Cophpee\Components\Router;
 
 class Router
 {

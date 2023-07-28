@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace tests;
+namespace Cophpee\Tests;
 
 use app\App;
 use PHPUnit\Framework\TestCase;

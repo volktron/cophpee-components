@@ -5,8 +5,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "\\cophpee\\components\\": "src/",
-            "\\tests\\": "tests/"
+            "Cophpee\\Components\\": "src/",
+            "Cophpee\\Tests\\": "tests/"
         }
     },
     "authors": [
