@@ -7,8 +7,9 @@ class Router
     public function __construct(public array $routes) {
     }
 
-    public function route(string $method, string $path): array {
-        $routes = array_filter($this->routes, fn($item) => $item['type'] == $method);
+    public function route(string $requestMethod, string $path): array {
+        $requestMethod = strtolower($requestMethod);
+        $routes = array_filter($this->routes, fn($item) => $item['type'] == $requestMethod);
 
         // TODO: cache this
         usort($routes, fn($left, $right) => strcmp($right['uri'], $left['uri']));
@@ -16,7 +17,7 @@ class Router
         foreach($routes as $route)
         {
             $uri = preg_replace('/\{([^}]+)}/', '(\w+)', $route['uri']);
-            if($route['type'] == strtolower($method)
+            if($route['type'] == $requestMethod
                 && preg_match('/' . str_replace('/', '\\/', $uri) . '/', $path, $matches))
             {
                 $paramsMatches = array_slice($matches, 1);
