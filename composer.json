@@ -16,6 +16,8 @@
         }
     ],
     "require": {
+        "ext-pdo": "*",
+        "php": ">=8.2",
         "phpunit/phpunit": "^10.2"
     }
 }
