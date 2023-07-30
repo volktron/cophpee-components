@@ -15,17 +15,26 @@ class Connection
     protected function getPdoFromParams(array $params): ?PDO {
         return match($params['type']) {
             'mysql' => new PDO(
-                'mysql:dbname='.$params['schema'].';host='.$params['host'].';port='.($params['port'] ?? 3306),
+                // mysql:host=<host>;port=<port>;dbname=<schema>;user=<username>;password=<password>
+                'mysql:host='.$params['host'].';port='.($params['port'] ?? 3306).'dbname='.$params['schema'],
                 $params['username'],
                 $params['password']
             ),
             'postgres' => new PDO(
-                'pgsql:dbname='.$params['schema'].';host='.$params['host'].';port='.($params['port'] ?? 5432).
+                // pgsql:host=<host>;port=<port>;dbname=<schema>;user=<username>;password=<password>
+                'pgsql:host='.$params['host'].';port='.($params['port'] ?? 5432).';dbname='.$params['schema'].
                 ';user='.$params['username'].
                 ';password='.$params['password']
             ),
             'sqlite' => new PDO(
+                // sqlite:<path>
                 'sqlite:'.($params['path'] ?? ':memory:')
+            ),
+            'sqlsrv' => new PDO(
+                // sqlsrv:Server=<host>,<port>;Database=<schema>
+                'sqlsrv:Server='.$params['host'].','.($params['port'] ?? 1521).';Database='.$params['schema'],
+                $params['username'],
+                $params['password']
             ),
             default => null
         };
