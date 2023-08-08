@@ -6,13 +6,20 @@ use PDO;
 
 class Connection
 {
-    protected PDO $pdo;
+    protected ?PDO $pdo;
 
-    public function __construct(array $params) {
-        $this->pdo = $this->getPdoFromParams($params);
+    public function __construct(protected array $params)
+    {
+        $this->init();
     }
 
-    protected function getPdoFromParams(array $params): ?PDO {
+    public function init(): void
+    {
+        $this->pdo = $this->getPdoFromParams($this->params);
+    }
+
+    protected function getPdoFromParams(array $params): ?PDO
+    {
         return match($params['type']) {
             'mysql' => new PDO(
                 // mysql:host=<host>;port=<port>;dbname=<schema>;user=<username>;password=<password>
@@ -69,5 +76,10 @@ class Connection
     public function end(): bool
     {
         return $this->pdo->commit();
+    }
+
+    public function close()
+    {
+        return $this->pdo = null;
     }
 }
