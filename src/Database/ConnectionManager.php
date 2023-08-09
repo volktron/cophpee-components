@@ -13,7 +13,7 @@ class ConnectionManager
             $this->connections[$connection['name']] = new Connection($connection);
         }
 
-        $this->defaultConnection = $config['default'] ?? $this->connections[0] ?? null;
+        $this->defaultConnection = $this->connections[$config['default']] ?? $this->connections[array_key_first($this->connections)] ?? null;
     }
 
     public function init(string $connectionName): void
@@ -26,6 +26,12 @@ class ConnectionManager
         foreach($this->connections as $connection) {
             $connection->close();
         }
+    }
+
+    public function setDefault(string $name): Connection
+    {
+        $this->defaultConnection = $this->connections[$name];
+        return $this->defaultConnection;
     }
 
     public function close(string $connectionName): void
