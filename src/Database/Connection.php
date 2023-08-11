@@ -27,7 +27,7 @@ class Connection
                 $params['username'],
                 $params['password']
             ),
-            'postgres' => new PDO(
+            'pgsql', 'postgres' => new PDO(
                 // pgsql:host=<host>;port=<port>;dbname=<schema>;user=<username>;password=<password>
                 'pgsql:host='.$params['host'].';port='.($params['port'] ?? 5432).';dbname='.$params['schema'].
                 ';user='.$params['username'].
@@ -37,7 +37,7 @@ class Connection
                 // sqlite:<path>
                 'sqlite:'.($params['path'] ?? ':memory:')
             ),
-            'sqlsrv' => new PDO(
+            'mssql', 'sqlsrv' => new PDO(
                 // sqlsrv:Server=<host>,<port>;Database=<schema>
                 'sqlsrv:Server='.$params['host'].','.($params['port'] ?? 1521).';Database='.$params['schema'],
                 $params['username'],

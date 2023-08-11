@@ -10,7 +10,7 @@ class DB
 {
     static ConnectionManager $connectionManager;
 
-    public static function init($config): void
+    public static function init(array $config): void
     {
         self::$connectionManager = new ConnectionManager($config);
     }
