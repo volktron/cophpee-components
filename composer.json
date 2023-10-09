@@ -1,6 +1,5 @@
 {
     "name": "volktron/cophpee-components",
-    "version": "0.0.5",
     "type": "library",
     "license": "MIT",
     "autoload": {
