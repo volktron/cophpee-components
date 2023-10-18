@@ -12,6 +12,7 @@ class Init extends AbstractCommand
         echo "Initializing new CoPHPee project\n";
 
         foreach([ // TODO: do a recursive directory scan instead of using hardcoded array of files
+            'cophpee',
             'app' . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'IndexController.php',
             'app' . DIRECTORY_SEPARATOR . 'routes' . DIRECTORY_SEPARATOR . 'routes.php',
             'configs' . DIRECTORY_SEPARATOR . 'examples' . DIRECTORY_SEPARATOR . 'databases.php',
