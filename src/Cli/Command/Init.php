@@ -15,6 +15,7 @@ class Init extends AbstractCommand
             'cophpee',
             'app' . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'IndexController.php',
             'app' . DIRECTORY_SEPARATOR . 'routes' . DIRECTORY_SEPARATOR . 'routes.php',
+            'app' . DIRECTORY_SEPARATOR . 'bootstrap.php',
             'configs' . DIRECTORY_SEPARATOR . 'examples' . DIRECTORY_SEPARATOR . 'databases.php',
             'public' . DIRECTORY_SEPARATOR . '.htaccess',
             'public' . DIRECTORY_SEPARATOR . 'index.php',
