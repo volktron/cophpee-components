@@ -63,6 +63,14 @@ class Connection
         return new Statement($pdoStatement);
     }
 
+    public function use(string $schema): void
+    {
+        $this->query(match($this->params['type']) {
+            'mysql' => "USE $schema",
+            'pgsql', 'postgres' => "SET search_path TO $schema"
+        });
+    }
+
     public function lastInsertId(): false|string
     {
         return $this->pdo->lastInsertId();
