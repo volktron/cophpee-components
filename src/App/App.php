@@ -4,6 +4,7 @@ namespace Cophpee\Components\App;
 
 use Cophpee\Components\Facade\DB;
 use Cophpee\Components\Router\Router;
+use Cophpee\Components\Facade\SESSION;
 use Throwable;
 
 class App
@@ -18,6 +19,7 @@ class App
         }
 
         // Initialize things.
+        SESSION::init($config['session']);
         DB::init($config['db'] ?? []);
         $this->router = new Router($config['routes'] ?? []);
     }
