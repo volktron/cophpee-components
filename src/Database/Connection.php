@@ -15,7 +15,16 @@ class Connection
 
     public function init(): void
     {
+        $this->params['type'] = match($this->params['type']) {
+            'postgres' => 'pgsql',
+            default => $this->params['type']
+        };
+
         $this->pdo = $this->getPdoFromParams($this->params);
+
+        if($this->params['type'] == 'pgsql') {
+            $this->schema($this->params['schema']);
+        }
     }
 
     protected function getPdoFromParams(array $params): ?PDO
@@ -27,9 +36,9 @@ class Connection
                 $params['username'],
                 $params['password']
             ),
-            'pgsql', 'postgres' => new PDO(
+            'pgsql' => new PDO(
                 // pgsql:host=<host>;port=<port>;dbname=<schema>;user=<username>;password=<password>
-                'pgsql:host='.$params['host'].';port='.($params['port'] ?? 5432).';dbname='.$params['schema'].
+                'pgsql:host='.$params['host'].';port='.($params['port'] ?? 5432).';dbname='.$params['database'].
                 ';user='.$params['username'].
                 ';password='.$params['password']
             ),
@@ -67,7 +76,7 @@ class Connection
     {
         $this->query(match($this->params['type']) {
             'mysql' => "USE $schema",
-            'pgsql', 'postgres' => "SET search_path TO $schema"
+            'pgsql' => "SET search_path TO $schema"
         });
     }
 
