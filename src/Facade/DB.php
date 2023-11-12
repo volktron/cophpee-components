@@ -39,9 +39,9 @@ class DB
         return self::$connectionManager->defaultConnection->lastInsertId();
     }
 
-    public static function use(string $schema): void
+    public static function schema(string $schema): void
     {
-        self::$connectionManager->defaultConnection->use($schema);
+        self::$connectionManager->defaultConnection->schema($schema);
     }
 
     public static function begin(): bool

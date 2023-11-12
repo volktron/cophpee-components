@@ -63,7 +63,7 @@ class Connection
         return new Statement($pdoStatement);
     }
 
-    public function use(string $schema): void
+    public function schema(string $schema): void
     {
         $this->query(match($this->params['type']) {
             'mysql' => "USE $schema",
